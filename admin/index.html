@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta name="theme-color" content="#111315"/>
+<meta name="robots" content="noindex,nofollow,noarchive"/>
+<meta name="referrer" content="same-origin"/>
+<title>Admin | MCR Serralheria</title>
+<link rel="icon" href="../img/favicon.svg" type="image/svg+xml"/>
+<link rel="stylesheet" href="../css/style.css?v=20260807-4"/>
+
+<style>
+/* PATCH ADMIN 2026-08-07 — login horizontal independente do cache do CSS externo */
+html,body{min-height:100%}
+body.admin-dashboard-page{margin:0;background:
+  radial-gradient(circle at 88% 18%,rgba(255,122,0,.13),transparent 28%),
+  #101315!important;color:#f4f5f6}
+.admin-login-view{
+  min-height:100vh!important;
+  width:100%!important;
+  display:grid!important;
+  place-items:center!important;
+  padding:34px!important;
+  box-sizing:border-box!important;
+}
+.admin-login-card.admin-login-horizontal{
+  width:min(1180px,calc(100vw - 68px))!important;
+  min-height:610px!important;
+  padding:0!important;
+  margin:0 auto!important;
+  display:grid!important;
+  grid-template-columns:minmax(0,1.12fr) minmax(380px,.88fr)!important;
+  overflow:hidden!important;
+  border:1px solid #343a3e!important;
+  background:#171a1d!important;
+  box-shadow:0 32px 90px rgba(0,0,0,.48)!important;
+}
+.admin-login-intro{
+  min-width:0!important;
+  padding:54px 58px 46px!important;
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:center!important;
+  position:relative!important;
+  border-right:1px solid #343a3e!important;
+  background:
+    linear-gradient(135deg,rgba(255,128,0,.08),transparent 38%),
+    #15181b!important;
+}
+.admin-login-intro:before{
+  content:""!important;position:absolute!important;left:0!important;top:0!important;
+  width:4px!important;height:100%!important;
+  background:linear-gradient(#ff7a00,#ffb000 35%,transparent 82%)!important;
+}
+.admin-login-horizontal .admin-login-logo{
+  display:block!important;width:205px!important;max-width:55%!important;margin:0 0 48px!important;
+}
+.admin-login-horizontal .admin-login-logo img{width:100%!important;height:auto!important;display:block!important}
+.admin-login-intro .eyebrow{color:#ffae00!important;font-weight:900!important;letter-spacing:.12em!important;text-transform:uppercase!important}
+.admin-login-intro h1{
+  color:#f5f6f7!important;font-size:clamp(3rem,5vw,5.3rem)!important;
+  line-height:.98!important;letter-spacing:-.045em!important;margin:16px 0 22px!important;
+}
+.admin-login-intro p{max-width:600px!important;color:#bac1c5!important;font-size:1rem!important;line-height:1.7!important}
+.admin-login-features{
+  display:flex!important;flex-wrap:wrap!important;gap:10px 22px!important;
+  margin:34px 0 0!important;padding:28px 0 0!important;border-top:1px solid #2d3235!important;
+}
+.admin-login-features span{color:#e6e8e9!important;font-size:.84rem!important;font-weight:750!important}
+.admin-login-features span:before{content:"•"!important;color:#ff9a00!important;margin-right:8px!important}
+.admin-back-site{display:inline-block!important;margin-top:42px!important;color:#aeb6ba!important;text-decoration:none!important}
+.admin-login-form-side{
+  min-width:0!important;padding:62px 54px!important;display:flex!important;
+  flex-direction:column!important;justify-content:center!important;background:#1a1e21!important;
+}
+.admin-login-form-head{margin-bottom:26px!important}
+.admin-login-form-head small{color:#ffad00!important;font-weight:900!important;letter-spacing:.13em!important}
+.admin-login-form-head h2{color:#fff!important;font-size:2rem!important;margin:8px 0 10px!important}
+.admin-login-form-head p{color:#adb5b9!important;margin:0!important;line-height:1.55!important}
+.admin-setup-alert{margin:0 0 20px!important}
+.admin-login-form-side .admin-auth-form{display:grid!important;gap:11px!important}
+.admin-login-form-side .admin-auth-form label{color:#f0f1f2!important;font-size:.73rem!important;font-weight:900!important;text-transform:uppercase!important}
+.admin-login-form-side .admin-auth-form input{
+  width:100%!important;min-height:54px!important;box-sizing:border-box!important;
+  background:#101315!important;color:#fff!important;border:1px solid #3b4246!important;
+}
+.admin-login-form-side .password-field{position:relative!important}
+.admin-login-form-side .password-field input{padding-right:96px!important}
+.admin-login-form-side .password-toggle{
+  position:absolute!important;right:12px!important;top:50%!important;transform:translateY(-50%)!important;
+  border:0!important;background:transparent!important;color:#ffae00!important;font-weight:900!important;cursor:pointer!important;
+}
+.admin-login-form-side .btn-block{
+  width:100%!important;min-height:54px!important;margin-top:6px!important;
+  border:0!important;background:linear-gradient(90deg,#ff7a00,#ffb000)!important;
+  color:#111!important;font-weight:900!important;letter-spacing:.08em!important;cursor:pointer!important;
+}
+.admin-connection-note{margin-top:22px!important;color:#8f989d!important;font-size:.72rem!important}
+@media(max-width:850px){
+  .admin-login-view{padding:16px!important}
+  .admin-login-card.admin-login-horizontal{
+    width:min(560px,100%)!important;min-height:auto!important;grid-template-columns:1fr!important;
+  }
+  .admin-login-intro{padding:30px 26px 25px!important;border-right:0!important;border-bottom:1px solid #343a3e!important}
+  .admin-login-horizontal .admin-login-logo{width:165px!important;margin-bottom:24px!important}
+  .admin-login-intro h1{font-size:2.75rem!important;margin:10px 0 12px!important}
+  .admin-login-features,.admin-login-intro .admin-back-site{display:none!important}
+  .admin-login-form-side{padding:30px 26px 34px!important}
+}
+</style>
+
+</head>
+<body class="admin-dashboard-page">
+
+<main id="adminRoot">
+  <section class="admin-login-view" id="adminLoginView">
+    <div class="admin-login-card admin-login-horizontal">
+      <div class="admin-login-intro">
+        <a class="admin-login-logo" href="../index.html" aria-label="Voltar para MCR Serralheria"><img src="../img/logo-mcr.svg" alt="MCR Serralheria"/></a>
+        <div>
+          <span class="eyebrow">Área de administração</span>
+          <h1>Painel MCR</h1>
+          <p>Controle clientes, códigos de rastreio e o andamento das ordens de serviço em um único lugar.</p>
+        </div>
+        <div class="admin-login-features" aria-label="Recursos do painel">
+          <span>Clientes e contatos</span>
+          <span>Ordens de serviço</span>
+          <span>Acompanhamento por etapas</span>
+        </div>
+        <a class="admin-back-site" href="../index.html">← Voltar ao site principal</a>
+      </div>
+
+      <div class="admin-login-form-side">
+        <div class="admin-login-form-head">
+          <small>ACESSO RESTRITO</small>
+          <h2>Entrar no painel</h2>
+          <p>Use o usuário administrativo e sua senha cadastrada.</p>
+        </div>
+        <div class="admin-setup-alert" id="adminSetupAlert" hidden>
+          <strong>Não foi possível iniciar a conexão.</strong>
+          <span>Atualize a página com <code>Ctrl + F5</code>. Se continuar, confira <code>js/supabase-config.js</code>.</span>
+        </div>
+        <form id="adminLoginForm" class="admin-auth-form">
+          <label for="adminUsername">Usuário</label>
+          <input id="adminUsername" name="username" autocomplete="username" maxlength="32" placeholder="admin" required/>
+          <label for="adminPassword">Senha</label>
+          <div class="password-field">
+            <input id="adminPassword" name="password" type="password" autocomplete="current-password" minlength="8" required/>
+            <button class="password-toggle" type="button" data-toggle-password="adminPassword" aria-label="Mostrar senha">Mostrar</button>
+          </div>
+          <button class="btn btn-primary btn-block" type="submit">Entrar</button>
+          <p class="admin-form-message" id="adminLoginMessage" aria-live="polite"></p>
+        </form>
+        <div class="admin-connection-note"><span></span> Conexão protegida pelo Supabase + RLS</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="admin-app" id="adminApp" hidden>
+    <aside class="admin-sidebar" id="adminSidebar">
+      <div class="admin-sidebar-top">
+        <button class="admin-sidebar-toggle" id="adminSidebarToggle" type="button" aria-label="Recolher menu"><span></span><span></span><span></span></button>
+        <a class="admin-sidebar-brand" href="../index.html"><img src="../img/logo-mcr.svg" alt="MCR Serralheria"/></a>
+      </div>
+      <nav class="admin-nav" aria-label="Menu administrativo">
+        <button class="admin-nav-link active" data-admin-view="overview" type="button"><span>⌂</span><b>Início</b></button>
+        <button class="admin-nav-link" data-admin-view="clients" type="button"><span>👥</span><b>Clientes</b></button>
+        <button class="admin-nav-link" data-admin-view="orders" type="button"><span>📦</span><b>Pedidos / Ordens</b></button>
+        <button class="admin-nav-link" data-admin-view="settings" type="button"><span>⚙</span><b>Configurações</b></button>
+      </nav>
+      <div class="admin-sidebar-footer">
+        <a href="../index.html"><span>↗</span><b>Site principal</b></a>
+        <button id="sidebarLogout" type="button"><span>⏻</span><b>Sair</b></button>
+      </div>
+    </aside>
+
+    <div class="admin-shell">
+      <header class="admin-topbar">
+        <button class="admin-mobile-menu" id="adminMobileMenu" type="button" aria-label="Abrir menu">☰</button>
+        <div>
+          <small>Painel administrativo</small>
+          <h1 id="adminViewTitle">Visão Geral</h1>
+        </div>
+        <div class="admin-account-chip"><span class="admin-account-dot"></span><strong id="adminCurrentUser">admin</strong></div>
+      </header>
+
+      <div class="admin-content">
+        <p class="admin-global-message" id="adminGlobalMessage" aria-live="polite"></p>
+
+        <section class="admin-view active" data-view-panel="overview">
+          <div class="admin-stat-grid">
+            <article class="admin-stat-card"><small>Clientes cadastrados</small><strong id="statClients">0</strong><span>Base de clientes</span></article>
+            <article class="admin-stat-card"><small>Pedidos em andamento</small><strong id="statActiveOrders">0</strong><span>Ordens não concluídas</span></article>
+            <article class="admin-stat-card"><small>Em soldagem</small><strong id="statWelding">0</strong><span>Etapa de montagem e solda</span></article>
+            <article class="admin-stat-card"><small>Pintura / acabamento</small><strong id="statPainting">0</strong><span>Etapa de acabamento</span></article>
+          </div>
+
+          <div class="admin-dashboard-grid">
+            <section class="admin-panel">
+              <div class="admin-panel-head"><div><small>Últimas atualizações</small><h2>Pedidos recentes</h2></div><button class="admin-text-button" data-go-view="orders" type="button">Ver todos</button></div>
+              <div id="recentOrders" class="admin-compact-list"></div>
+            </section>
+            <section class="admin-panel">
+              <div class="admin-panel-head"><div><small>Fluxo da oficina</small><h2>Etapas do processo</h2></div></div>
+              <ol class="admin-process-summary" id="processSummary"></ol>
+            </section>
+          </div>
+        </section>
+
+        <section class="admin-view" data-view-panel="clients" hidden>
+          <div class="admin-toolbar">
+            <div class="admin-search"><span>⌕</span><input id="clientSearch" type="search" placeholder="Buscar por nome ou telefone"/></div>
+            <button class="btn btn-primary" id="newClientButton" type="button">+ Novo cliente</button>
+          </div>
+          <div class="admin-two-column">
+            <section class="admin-panel admin-form-card" id="clientFormCard" hidden>
+              <div class="admin-panel-head"><div><small>Cadastro</small><h2 id="clientFormTitle">Novo cliente</h2></div><button class="admin-icon-button" id="closeClientForm" type="button" aria-label="Fechar">×</button></div>
+              <form id="clientForm" class="admin-grid-form">
+                <input id="clientId" type="hidden"/>
+                <label>Nome<input id="clientNameAdmin" maxlength="120" required placeholder="Nome do cliente"/></label>
+                <label>WhatsApp<input id="clientPhoneAdmin" inputmode="tel" maxlength="20" required placeholder="67999999999"/></label>
+                <div class="admin-form-actions"><button class="btn btn-primary" type="submit">Salvar cliente</button><button class="btn btn-ghost" id="cancelClientEdit" type="button">Cancelar</button></div>
+              </form>
+            </section>
+            <section class="admin-panel admin-list-card">
+              <div class="admin-panel-head"><div><small>Cadastro e histórico</small><h2>Clientes</h2></div><span class="admin-count" id="clientCount">0</span></div>
+              <div id="clientsList" class="admin-client-list"></div>
+            </section>
+          </div>
+        </section>
+
+        <section class="admin-view" data-view-panel="orders" hidden>
+          <div class="admin-toolbar">
+            <div class="admin-search"><span>⌕</span><input id="orderSearch" type="search" placeholder="Buscar por código, cliente ou serviço"/></div>
+            <button class="btn btn-primary" id="newOrderButton" type="button">+ Nova ordem de serviço</button>
+          </div>
+
+          <section class="admin-panel admin-form-card" id="orderFormCard" hidden>
+            <div class="admin-panel-head"><div><small>Nova ordem</small><h2>Criar código de rastreio</h2></div><button class="admin-icon-button" id="closeOrderForm" type="button" aria-label="Fechar">×</button></div>
+            <form id="orderFormAdmin" class="admin-grid-form admin-order-form">
+              <label>Cliente<select id="orderClient" required><option value="">Selecione um cliente</option></select></label>
+              <label>Tipo de serviço<select id="orderServiceType" required>
+                <option value="">Selecione</option><option>Portão</option><option>Cobertura</option><option>Mezanino</option><option>Escada</option><option>Móvel Industrial</option><option>Grade</option><option>Corrimão</option><option>Estrutura Metálica</option><option>Outro</option>
+              </select></label>
+              <label class="full">Descrição do pedido<input id="orderTitle" maxlength="160" required placeholder="Ex.: Portão basculante 3x2m"/></label>
+              <label class="full">Observações<textarea id="orderDescriptionAdmin" maxlength="1200" placeholder="Medidas, acabamento, detalhes combinados..."></textarea></label>
+              <label>Previsão de entrega<input id="orderForecast" type="date"/></label>
+              <div class="admin-process-model"><small>Processo</small><strong>Fabricação Estrutural e Sob Medida</strong><span>6 etapas de acompanhamento</span></div>
+              <div class="admin-form-actions full"><button class="btn btn-primary" type="submit">Criar ordem e gerar código</button><button class="btn btn-ghost" id="cancelOrderCreate" type="button">Cancelar</button></div>
+            </form>
+          </section>
+
+          <section class="admin-panel admin-list-card">
+            <div class="admin-panel-head"><div><small>Produção</small><h2>Pedidos / Ordens de Serviço</h2></div><span class="admin-count" id="orderCount">0</span></div>
+            <div class="admin-status-legend"><span class="tag in-progress">Em andamento</span><span class="tag painting">Pintura / acabamento</span><span class="tag done">Pronto / entregue</span></div>
+            <div id="ordersList" class="admin-orders-list"></div>
+          </section>
+        </section>
+
+        <section class="admin-view" data-view-panel="settings" hidden>
+          <div class="admin-settings-grid">
+            <section class="admin-panel">
+              <div class="admin-panel-head"><div><small>Acesso</small><h2>Alterar usuário</h2></div></div>
+              <form id="usernameForm" class="admin-grid-form">
+                <label>Novo usuário<input id="newUsername" autocomplete="username" maxlength="32" required/></label>
+                <button class="btn btn-primary" type="submit">Salvar usuário</button>
+              </form>
+            </section>
+            <section class="admin-panel">
+              <div class="admin-panel-head"><div><small>Segurança</small><h2>Alterar senha</h2></div></div>
+              <form id="passwordForm" class="admin-grid-form">
+                <label>Nova senha<div class="password-field"><input id="newPassword" type="password" autocomplete="new-password" minlength="8" required/><button class="password-toggle" type="button" data-toggle-password="newPassword">Mostrar</button></div></label>
+                <label>Confirmar senha<input id="confirmPassword" type="password" autocomplete="new-password" minlength="8" required/></label>
+                <button class="btn btn-primary" type="submit">Trocar senha</button>
+              </form>
+            </section>
+            <section class="admin-panel admin-danger-panel">
+              <div class="admin-panel-head"><div><small>Sessão</small><h2>Sair do painel</h2></div></div>
+              <p>Encerra a sessão deste navegador. O painel exigirá login novamente.</p>
+              <div class="admin-form-actions"><button class="btn btn-ghost" id="settingsLogout" type="button">Encerrar sessão</button><a class="btn btn-ghost" href="../index.html">Voltar ao site</a></div>
+            </section>
+          </div>
+        </section>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Compatibilidade: funciona com o backend antigo e com o novo -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../js/supabase-config.js?v=20260807-4"></script>
+<script>
+/* Corrige automaticamente URL copiada como .../rest/v1/ e evita erro por barra final. */
+if (window.MCR_SUPABASE && window.MCR_SUPABASE.url) {
+  window.MCR_SUPABASE.url = String(window.MCR_SUPABASE.url)
+    .trim()
+    .replace(/\/rest\/v1\/?$/i, '')
+    .replace(/\/+$/, '');
+}
+</script>
+<script src="../js/backend.js?v=20260807-4"></script>
+<script src="../js/admin.js?v=20260807-4"></script>
+</body>
+</html>
