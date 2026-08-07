@@ -1,0 +1,13 @@
+MCR SERRALHERIA — atualização
+
+- Páginas Sobre e Suporte removidas.
+- Região de contato atualizada para Brasil • Mato Grosso do Sul • Três Lagoas.
+- Horário removido da página de contato.
+- Serviços e categorias abrem dentro do próprio site, na mesma aba.
+- Botão Voltar adicionado às páginas internas.
+- Imagens de serviços substituídas pelas imagens fornecidas.
+- Recurso de estimativa automática removido.
+- Texto de tradição/experiência atualizado na página inicial.
+- Faíscas em botões mantidas leves e otimizadas.
+- Animação de rolagem reforçada no desktop.
+- Abertura do menu no desktop ganhou expansão lateral e faíscas.

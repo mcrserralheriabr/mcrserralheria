@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta name="theme-color" content="#111315"/>
+<meta name="robots" content="noindex,nofollow,noarchive"/>
+<meta name="referrer" content="same-origin"/>
+<title>Admin | MCR Serralheria</title>
+<link rel="icon" href="../img/favicon.svg" type="image/svg+xml"/>
+<link rel="stylesheet" href="../css/style.css"/>
+</head>
+<body class="admin-dashboard-page">
+
+<main id="adminRoot">
+  <section class="admin-login-view" id="adminLoginView">
+    <div class="admin-login-card admin-login-horizontal">
+      <div class="admin-login-intro">
+        <a class="admin-login-logo" href="../index.html" aria-label="Voltar para MCR Serralheria"><img src="../img/logo-mcr.svg" alt="MCR Serralheria"/></a>
+        <div>
+          <span class="eyebrow">Área de administração</span>
+          <h1>Painel MCR</h1>
+          <p>Controle clientes, códigos de rastreio e o andamento das ordens de serviço em um único lugar.</p>
+        </div>
+        <div class="admin-login-features" aria-label="Recursos do painel">
+          <span>Clientes e contatos</span>
+          <span>Ordens de serviço</span>
+          <span>Acompanhamento por etapas</span>
+        </div>
+        <a class="admin-back-site" href="../index.html">← Voltar ao site principal</a>
+      </div>
+
+      <div class="admin-login-form-side">
+        <div class="admin-login-form-head">
+          <small>ACESSO RESTRITO</small>
+          <h2>Entrar no painel</h2>
+          <p>Use o usuário administrativo e sua senha cadastrada.</p>
+        </div>
+        <div class="admin-setup-alert" id="adminSetupAlert" hidden>
+          <strong>Conexão do banco não configurada.</strong>
+          <span>Confira <code>js/supabase-config.js</code>.</span>
+        </div>
+        <form id="adminLoginForm" class="admin-auth-form">
+          <label for="adminUsername">Usuário</label>
+          <input id="adminUsername" name="username" autocomplete="username" maxlength="32" placeholder="admin" required/>
+          <label for="adminPassword">Senha</label>
+          <div class="password-field">
+            <input id="adminPassword" name="password" type="password" autocomplete="current-password" minlength="8" required/>
+            <button class="password-toggle" type="button" data-toggle-password="adminPassword" aria-label="Mostrar senha">Mostrar</button>
+          </div>
+          <button class="btn btn-primary btn-block" type="submit">Entrar</button>
+          <p class="admin-form-message" id="adminLoginMessage" aria-live="polite"></p>
+        </form>
+        <div class="admin-connection-note"><span></span> Conexão protegida pelo Supabase + RLS</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="admin-app" id="adminApp" hidden>
+    <aside class="admin-sidebar" id="adminSidebar">
+      <div class="admin-sidebar-top">
+        <button class="admin-sidebar-toggle" id="adminSidebarToggle" type="button" aria-label="Recolher menu"><span></span><span></span><span></span></button>
+        <a class="admin-sidebar-brand" href="../index.html"><img src="../img/logo-mcr.svg" alt="MCR Serralheria"/></a>
+      </div>
+      <nav class="admin-nav" aria-label="Menu administrativo">
+        <button class="admin-nav-link active" data-admin-view="overview" type="button"><span>⌂</span><b>Início</b></button>
+        <button class="admin-nav-link" data-admin-view="clients" type="button"><span>👥</span><b>Clientes</b></button>
+        <button class="admin-nav-link" data-admin-view="orders" type="button"><span>📦</span><b>Pedidos / Ordens</b></button>
+        <button class="admin-nav-link" data-admin-view="settings" type="button"><span>⚙</span><b>Configurações</b></button>
+      </nav>
+      <div class="admin-sidebar-footer">
+        <a href="../index.html"><span>↗</span><b>Site principal</b></a>
+        <button id="sidebarLogout" type="button"><span>⏻</span><b>Sair</b></button>
+      </div>
+    </aside>
+
+    <div class="admin-shell">
+      <header class="admin-topbar">
+        <button class="admin-mobile-menu" id="adminMobileMenu" type="button" aria-label="Abrir menu">☰</button>
+        <div>
+          <small>Painel administrativo</small>
+          <h1 id="adminViewTitle">Visão Geral</h1>
+        </div>
+        <div class="admin-account-chip"><span class="admin-account-dot"></span><strong id="adminCurrentUser">admin</strong></div>
+      </header>
+
+      <div class="admin-content">
+        <p class="admin-global-message" id="adminGlobalMessage" aria-live="polite"></p>
+
+        <section class="admin-view active" data-view-panel="overview">
+          <div class="admin-stat-grid">
+            <article class="admin-stat-card"><small>Clientes cadastrados</small><strong id="statClients">0</strong><span>Base de clientes</span></article>
+            <article class="admin-stat-card"><small>Pedidos em andamento</small><strong id="statActiveOrders">0</strong><span>Ordens não concluídas</span></article>
+            <article class="admin-stat-card"><small>Em soldagem</small><strong id="statWelding">0</strong><span>Etapa de montagem e solda</span></article>
+            <article class="admin-stat-card"><small>Pintura / acabamento</small><strong id="statPainting">0</strong><span>Etapa de acabamento</span></article>
+          </div>
+
+          <div class="admin-dashboard-grid">
+            <section class="admin-panel">
+              <div class="admin-panel-head"><div><small>Últimas atualizações</small><h2>Pedidos recentes</h2></div><button class="admin-text-button" data-go-view="orders" type="button">Ver todos</button></div>
+              <div id="recentOrders" class="admin-compact-list"></div>
+            </section>
+            <section class="admin-panel">
+              <div class="admin-panel-head"><div><small>Fluxo da oficina</small><h2>Etapas do processo</h2></div></div>
+              <ol class="admin-process-summary" id="processSummary"></ol>
+            </section>
+          </div>
+        </section>
+
+        <section class="admin-view" data-view-panel="clients" hidden>
+          <div class="admin-toolbar">
+            <div class="admin-search"><span>⌕</span><input id="clientSearch" type="search" placeholder="Buscar por nome ou telefone"/></div>
+            <button class="btn btn-primary" id="newClientButton" type="button">+ Novo cliente</button>
+          </div>
+          <div class="admin-two-column">
+            <section class="admin-panel admin-form-card" id="clientFormCard" hidden>
+              <div class="admin-panel-head"><div><small>Cadastro</small><h2 id="clientFormTitle">Novo cliente</h2></div><button class="admin-icon-button" id="closeClientForm" type="button" aria-label="Fechar">×</button></div>
+              <form id="clientForm" class="admin-grid-form">
+                <input id="clientId" type="hidden"/>
+                <label>Nome<input id="clientNameAdmin" maxlength="120" required placeholder="Nome do cliente"/></label>
+                <label>WhatsApp<input id="clientPhoneAdmin" inputmode="tel" maxlength="20" required placeholder="67999999999"/></label>
+                <div class="admin-form-actions"><button class="btn btn-primary" type="submit">Salvar cliente</button><button class="btn btn-ghost" id="cancelClientEdit" type="button">Cancelar</button></div>
+              </form>
+            </section>
+            <section class="admin-panel admin-list-card">
+              <div class="admin-panel-head"><div><small>Cadastro e histórico</small><h2>Clientes</h2></div><span class="admin-count" id="clientCount">0</span></div>
+              <div id="clientsList" class="admin-client-list"></div>
+            </section>
+          </div>
+        </section>
+
+        <section class="admin-view" data-view-panel="orders" hidden>
+          <div class="admin-toolbar">
+            <div class="admin-search"><span>⌕</span><input id="orderSearch" type="search" placeholder="Buscar por código, cliente ou serviço"/></div>
+            <button class="btn btn-primary" id="newOrderButton" type="button">+ Nova ordem de serviço</button>
+          </div>
+
+          <section class="admin-panel admin-form-card" id="orderFormCard" hidden>
+            <div class="admin-panel-head"><div><small>Nova ordem</small><h2>Criar código de rastreio</h2></div><button class="admin-icon-button" id="closeOrderForm" type="button" aria-label="Fechar">×</button></div>
+            <form id="orderFormAdmin" class="admin-grid-form admin-order-form">
+              <label>Cliente<select id="orderClient" required><option value="">Selecione um cliente</option></select></label>
+              <label>Tipo de serviço<select id="orderServiceType" required>
+                <option value="">Selecione</option><option>Portão</option><option>Cobertura</option><option>Mezanino</option><option>Escada</option><option>Móvel Industrial</option><option>Grade</option><option>Corrimão</option><option>Estrutura Metálica</option><option>Outro</option>
+              </select></label>
+              <label class="full">Descrição do pedido<input id="orderTitle" maxlength="160" required placeholder="Ex.: Portão basculante 3x2m"/></label>
+              <label class="full">Observações<textarea id="orderDescriptionAdmin" maxlength="1200" placeholder="Medidas, acabamento, detalhes combinados..."></textarea></label>
+              <label>Previsão de entrega<input id="orderForecast" type="date"/></label>
+              <div class="admin-process-model"><small>Processo</small><strong>Fabricação Estrutural e Sob Medida</strong><span>6 etapas de acompanhamento</span></div>
+              <div class="admin-form-actions full"><button class="btn btn-primary" type="submit">Criar ordem e gerar código</button><button class="btn btn-ghost" id="cancelOrderCreate" type="button">Cancelar</button></div>
+            </form>
+          </section>
+
+          <section class="admin-panel admin-list-card">
+            <div class="admin-panel-head"><div><small>Produção</small><h2>Pedidos / Ordens de Serviço</h2></div><span class="admin-count" id="orderCount">0</span></div>
+            <div class="admin-status-legend"><span class="tag in-progress">Em andamento</span><span class="tag painting">Pintura / acabamento</span><span class="tag done">Pronto / entregue</span></div>
+            <div id="ordersList" class="admin-orders-list"></div>
+          </section>
+        </section>
+
+        <section class="admin-view" data-view-panel="settings" hidden>
+          <div class="admin-settings-grid">
+            <section class="admin-panel">
+              <div class="admin-panel-head"><div><small>Acesso</small><h2>Alterar usuário</h2></div></div>
+              <form id="usernameForm" class="admin-grid-form">
+                <label>Novo usuário<input id="newUsername" autocomplete="username" maxlength="32" required/></label>
+                <button class="btn btn-primary" type="submit">Salvar usuário</button>
+              </form>
+            </section>
+            <section class="admin-panel">
+              <div class="admin-panel-head"><div><small>Segurança</small><h2>Alterar senha</h2></div></div>
+              <form id="passwordForm" class="admin-grid-form">
+                <label>Nova senha<div class="password-field"><input id="newPassword" type="password" autocomplete="new-password" minlength="8" required/><button class="password-toggle" type="button" data-toggle-password="newPassword">Mostrar</button></div></label>
+                <label>Confirmar senha<input id="confirmPassword" type="password" autocomplete="new-password" minlength="8" required/></label>
+                <button class="btn btn-primary" type="submit">Trocar senha</button>
+              </form>
+            </section>
+            <section class="admin-panel admin-danger-panel">
+              <div class="admin-panel-head"><div><small>Sessão</small><h2>Sair do painel</h2></div></div>
+              <p>Encerra a sessão deste navegador. O painel exigirá login novamente.</p>
+              <div class="admin-form-actions"><button class="btn btn-ghost" id="settingsLogout" type="button">Encerrar sessão</button><a class="btn btn-ghost" href="../index.html">Voltar ao site</a></div>
+            </section>
+          </div>
+        </section>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script src="../js/supabase-config.js"></script>
+<script src="../js/backend.js"></script>
+<script src="../js/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+MCR SERRALHERIA — RELATÓRIO DE ALTERAÇÕES
+
+1. CABEÇALHO
+- Logo reduzida em todas as páginas.
+- Altura do cabeçalho e tamanho do botão de menu reduzidos.
+- Menu redesenhado: o botão desliza para a direita e as opções aparecem da direita para a esquerda dentro do cabeçalho.
+- Adaptação específica para celular e tablet.
+
+2. PÁGINA INICIAL
+- Texto “estrutura” recebeu fonte industrial diferente e cor laranja-solda.
+- Animação técnica removida completamente da área direita do topo.
+- Blocos de informação atualizados para tradição, qualidade do aço, acabamento e orçamento.
+
+3. ANIMAÇÕES
+- Faíscas adicionadas a botões, filtros, menu e ícones sociais.
+- Efeito de linha de solda adicionado aos cartões e painéis durante o hover.
+- Entrada das seções recebeu brilho leve e escalonado.
+- Preferência de movimento reduzido continua respeitada.
+
+4. SERVIÇOS
+- Categorias reorganizadas de acordo com os itens existentes.
+- Cada cartão exibe sua categoria.
+- Descrição passou a ser opcional em serviços específicos.
+- Nome e descrição permanecem obrigatórios no pedido personalizado.
+- Seção “Veja nosso trabalho na prática” removida por completo.
+- Vídeo de demonstração sem uso removido do projeto.
+
+5. VALIDAÇÕES
+- JavaScript validado sem erros de sintaxe.
+- CSS analisado sem erros de estrutura.
+- HTML analisado sem IDs duplicados.
+- Referências locais verificadas.
